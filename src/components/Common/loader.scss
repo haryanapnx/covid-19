@@ -1,0 +1,13 @@
+.overlay-loader {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.459);
+  z-index: 5;
+  .loader {
+    left: 0;
+    right: 0;
+    top: 50%;
+    // top: 0;
+  }
+}

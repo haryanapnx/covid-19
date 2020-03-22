@@ -1,0 +1,26 @@
+.bg-header {
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  min-height: 350px;
+  background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%); }
+  @media screen and (max-width: 768px) {
+    .bg-header h1 {
+      font-size: 30px; }
+    .bg-header p {
+      font-size: 11px; } }
+
+@media screen and (max-width: 768px) {
+  .bottom-nav {
+    text-align: center;
+    display: block;
+    position: fixed !important;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 3;
+    padding: .5em;
+    border-top: solid 1px #f3f3f3; } }
+
+@media screen and (min-width: 900px) {
+  .bottom-nav {
+    display: none; } }
