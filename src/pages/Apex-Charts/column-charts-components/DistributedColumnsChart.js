@@ -35,13 +35,13 @@ const DistributedColumnsChart = ({ dataByCountry }) => {
           },
           xaxis: {
             categories: [
-              dataByCountry.cases,
-              dataByCountry.todayCases,
-              dataByCountry.active,
-              dataByCountry.recovered,
-              dataByCountry.critical,
-              dataByCountry.todayDeaths,
-              dataByCountry.deaths
+              "Kasus",
+              "Kasus Hari ini",
+              "Terinfeksi",
+              "Sembuh",
+              "Kritis",
+              "Meninggal hari ini",
+              "Meninggal"
             ],
             labels: {
               style: {
