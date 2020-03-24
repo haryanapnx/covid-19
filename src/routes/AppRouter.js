@@ -13,19 +13,17 @@ const DashboardThree = loadable(() =>
 );
 const Loader = loadable(() => import("../components/Common/Loader"));
 
-const AppRouter = props => (
+const AppRouter = () => (
   <React.Suspense fallback={<Loader />}>
-    <React.Fragment>
-      <Switch>
-        <Route exact path="/" component={props => <Dashboard {...props} />} />
-        <Route
-          exact
-          path="/countries/:slug"
-          component={props => <DashboardThree {...props} />}
-        />
-        <Route component={props => <FourHandedFourError {...props} />} />
-      </Switch>
-    </React.Fragment>
+    <Switch>
+      <Route exact path="/" component={props => <Dashboard {...props} />} />
+      <Route
+        exact
+        path="/countries/:slug"
+        component={props => <DashboardThree {...props} />}
+      />
+      <Route component={props => <FourHandedFourError {...props} />} />
+    </Switch>
   </React.Suspense>
 );
 

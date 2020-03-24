@@ -6,16 +6,18 @@ import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
 import "./home.css";
 import { isEmpty } from "../../commons/helper";
+import Header from "../../components/Header/header";
 
+const CustomJVectorMap = loadable(() => import("../Map/CustomJVectorMap"));
 const NewUsers = loadable(() => import("../../components/Dashboard/NewUsers"));
-const Header = loadable(() => import("../../components/Header/header"));
+// const Header = loadable(() => import("../../components/Header/header"));
 const Footer = loadable(() => import("../Footer/Footer"));
 const SalesByCountries = loadable(() =>
   import("../../components/Dashboard/SalesByCountries")
 );
 
 const Home = () => {
-  const { dataGlobal, data } = useSelector(
+  const { dataGlobal, dataMap, data } = useSelector(
     ({ getAllCountries }) => getAllCountries
   );
 
@@ -57,14 +59,20 @@ const Home = () => {
               </Col>
             ))}
         </Row>
-        <Row>
-          <Col lg={12}>{!isEmpty(data) && <NewUsers data={data} />}</Col>
-        </Row>
-        <Row>
-          <Col lg={12}>
-            {!isEmpty(data) && <SalesByCountries data={data} />}
-          </Col>
-        </Row>
+        {!isEmpty(data) && (
+          <Row>
+            <Col lg={12}>
+              <NewUsers data={data} />
+            </Col>
+
+            <Col lg={12}>
+              <CustomJVectorMap data={dataMap} />
+            </Col>
+            <Col lg={12}>
+              <SalesByCountries data={data} />
+            </Col>
+          </Row>
+        )}
         <div className="flex-grow-1"></div>
         <Footer />
       </Container>

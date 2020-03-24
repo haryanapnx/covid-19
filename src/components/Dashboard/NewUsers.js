@@ -33,7 +33,12 @@ const NewUsers = ({ data }) => {
                         state: ""
                       }}
                     >
-                      {people.country}
+                      <img
+                        style={{ maxWidth: "15px" }}
+                        src={people.countryInfo.flag}
+                        alt={idx}
+                      />{' '}
+                       {people.country}
                     </Link>
                   </td>
                   <td>

@@ -1,22 +1,9 @@
-// import React from "react";
-// import ReactDOM from "react-dom";
-// import { BrowserRouter } from "react-router-dom";
-// import "./assets/css/bootstrap/scss/bootstrap.scss";
-// import AppRouter from "./routes/AppRouter";
-
-// ReactDOM.render(
-//   <BrowserRouter basename="/home">
-//     <AppRouter />
-//   </BrowserRouter>,
-//   document.querySelector("#root")
-// );
-
-
 import React from "react";
 import "./assets/css/bootstrap/scss/bootstrap.css";
 import "./assets/css/style.css";
 import ReactDOM from "react-dom";
 import thunkMiddleware from "redux-thunk";
+import loadable from "@loadable/component";
 
 import history from "./history";
 import { Router, BrowserRouter } from "react-router-dom";
@@ -27,7 +14,7 @@ import { persistStore, persistReducer } from "redux-persist";
 
 import reducer from "./redux/reducers/index";
 import storage from "redux-persist/lib/storage";
-import AppRouter from "./routes/AppRouter";
+const AppRouter = loadable(() => import("./routes/AppRouter"));
 
 const persistConfig = {
   key: "root",

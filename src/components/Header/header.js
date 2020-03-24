@@ -6,7 +6,7 @@ import { Form, Container, Jumbotron, Button, Row, Col } from "react-bootstrap";
 import Select from "react-select";
 import "./header.css";
 import { isEmpty } from "../../commons/helper";
-import { getAllCountry, getByGLobal } from "../../redux/actions";
+import { getAllCountry, getByGLobal, getByCountry } from "../../redux/actions";
 import * as Icon from "react-feather";
 import loadable from "@loadable/component";
 const Loader = loadable(() => import("../Common/Loader"));
@@ -18,21 +18,24 @@ const Header = () => {
     ? fromRouter
     : fromBrowser[fromBrowser.length - 1];
   const dispatch = useDispatch();
-  const [endpoint, setEndpoint] = useState("");
   const [selectCountry, setSelectCountry] = useState(null);
   const { countries, loading } = useSelector(
     ({ getAllCountries }) => getAllCountries
   );
 
   useEffect(() => {
-    setEndpoint(slug);
     setSelectCountry({ value: slug, label: slug });
-    getApi(endpoint);
-  }, [fromRouter, endpoint]);
+    getApi();
+  }, [fromRouter, slug]);
 
-  const getApi = async param => {
-    await dispatch(getAllCountry(param));
-    await dispatch(getByGLobal());
+  const getApi = async () => {
+    
+    if (slug === "") {
+      await dispatch(getAllCountry());
+      await dispatch(getByGLobal());
+    } else {
+      await dispatch(getByCountry(slug));
+    }
   };
   const toHome = () => {
     window.scrollTo(0, 0);
