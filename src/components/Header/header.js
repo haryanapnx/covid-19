@@ -6,22 +6,30 @@ import { Form, Container, Jumbotron, Button, Row, Col } from "react-bootstrap";
 import Select from "react-select";
 import "./header.css";
 import { isEmpty } from "../../commons/helper";
-import { getAllCountry, getByGLobal, getByCountry } from "../../redux/actions";
+import {
+  getAllCountry,
+  getByGLobal,
+  getByCountry,
+  getByIDProvince
+} from "../../redux/actions";
 import * as Icon from "react-feather";
 import loadable from "@loadable/component";
+
 const Loader = loadable(() => import("../Common/Loader"));
 
 const Header = () => {
-  let fromRouter = history.location.state;
-  let fromBrowser = window.location.pathname.split("/");
-  let slug = !isEmpty(fromRouter)
-    ? fromRouter
-    : fromBrowser[fromBrowser.length - 1];
   const dispatch = useDispatch();
   const [selectCountry, setSelectCountry] = useState(null);
   const { countries, loading } = useSelector(
     ({ getAllCountries }) => getAllCountries
   );
+
+  let fromRouter = history.location.state;
+  let fromBrowser = window.location.pathname.split("/");
+  let slug = !isEmpty(fromRouter)
+    ? fromRouter
+    : fromBrowser[fromBrowser.length - 1];
+  
 
   useEffect(() => {
     setSelectCountry({ value: slug, label: slug });
@@ -29,12 +37,14 @@ const Header = () => {
   }, [fromRouter, slug]);
 
   const getApi = async () => {
-    
     if (slug === "") {
       await dispatch(getAllCountry());
       await dispatch(getByGLobal());
     } else {
       await dispatch(getByCountry(slug));
+      if (slug === "indonesia") {
+        await dispatch(getByIDProvince());
+      }
     }
   };
   const toHome = () => {

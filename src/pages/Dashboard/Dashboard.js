@@ -6,15 +6,8 @@ import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
 import "./home.css";
 import { isEmpty } from "../../commons/helper";
-import Header from "../../components/Header/header";
+import ContentLoader from "react-content-loader";
 
-const CustomJVectorMap = loadable(() => import("../Map/CustomJVectorMap"));
-const NewUsers = loadable(() => import("../../components/Dashboard/NewUsers"));
-// const Header = loadable(() => import("../../components/Header/header"));
-const Footer = loadable(() => import("../Footer/Footer"));
-const SalesByCountries = loadable(() =>
-  import("../../components/Dashboard/SalesByCountries")
-);
 
 const Home = () => {
   const { dataGlobal, dataMap, data } = useSelector(
@@ -40,7 +33,7 @@ const Home = () => {
                 state: ""
               }}
             >
-              <b>Total Kasus Di seluruh dunia</b>
+              <b>Total kasus di seluruh dunia</b>
             </Link>
           </Breadcrumb>
         </div>
@@ -59,21 +52,22 @@ const Home = () => {
               </Col>
             ))}
         </Row>
-        {!isEmpty(data) && (
-          <Row>
-            <Col lg={12}>
-              <NewUsers data={data} />
-            </Col>
+        <Row>
+          {!isEmpty(data) && (
+            <>
+              <Col lg={12}>
+                <NewUsers data={data} />
+              </Col>
 
-            <Col lg={12}>
-              <CustomJVectorMap data={dataMap} />
-            </Col>
-            <Col lg={12}>
-              <SalesByCountries data={data} />
-            </Col>
-          </Row>
-        )}
-        <div className="flex-grow-1"></div>
+              <Col lg={12}>
+                <CustomJVectorMap data={dataMap} />
+              </Col>
+              <Col lg={12}>
+                <SalesByCountries data={data} />
+              </Col>
+            </>
+          )}
+        </Row>
         <Footer />
       </Container>
     </div>
@@ -81,3 +75,23 @@ const Home = () => {
 };
 
 export default Home;
+
+
+const Header = loadable(() => import("../../components/Header/header"), {
+  fallback: <ContentLoader />
+});
+const CustomJVectorMap = loadable(() => import("../Map/CustomJVectorMap"), {
+  fallback: <ContentLoader />
+});
+const NewUsers = loadable(() => import("../../components/Dashboard/NewUsers"), {
+  fallback: <ContentLoader />
+});
+const Footer = loadable(() => import("../Footer/Footer"), {
+  fallback: <ContentLoader />
+});
+const SalesByCountries = loadable(
+  () => import("../../components/Dashboard/SalesByCountries"),
+  {
+    fallback: <ContentLoader />
+  }
+);

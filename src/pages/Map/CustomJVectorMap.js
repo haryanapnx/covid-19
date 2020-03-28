@@ -1,14 +1,14 @@
 import React from "react";
 import { VectorMap } from "react-jvectormap";
 
-class CustomJVectorMap extends React.Component {
+class CustomJVectorMap extends React.PureComponent {
   render() {
     const { data } = this.props;
     return (
       <div className="card mb-4">
         <div className="card-body">
           <div className="card-header">
-            <h5 className="card-title">Kasus Berdasarkan Neta Negara</h5>
+            <h5 className="card-title">Kasus Berdasarkan Peta Negara</h5>
           </div>
           <div className="map-height-500">
             <VectorMap

@@ -6,21 +6,20 @@ import history from "../../history";
 import loadable from "@loadable/component";
 import { Row, Breadcrumb, Col, Container } from "react-bootstrap";
 import "./home.css";
-const Header = loadable(() => import("../../components/Header/header"));
-const Footer = loadable(() => import("../Footer/Footer"));
-const DistributedColumnsChart = loadable(() =>
-  import("../Apex-Charts/column-charts-components/DistributedColumnsChart")
-);
+import ContentLoader from "react-content-loader";
 
 const DashboardThree = () => {
+  const { dataByCountry, indonesia } = useSelector(
+    ({ getAllCountries }) => getAllCountries
+  );
+
   let fromRouter = history.location.state;
   let fromBrowser = window.location.pathname.split("/");
+
   let slug = !isEmpty(fromRouter)
     ? fromRouter
     : fromBrowser[fromBrowser.length - 1];
-  const { dataByCountry } = useSelector(
-    ({ getAllCountries }) => getAllCountries
-  );
+
   const hightlight = !isEmpty(dataByCountry)
     ? [
         { value: dataByCountry.cases, label: "Kasus", style: "purple" },
@@ -35,6 +34,7 @@ const DashboardThree = () => {
         { value: dataByCountry.deaths, label: "Meninggal", style: "gray" }
       ]
     : [];
+
   return (
     <div className="page-wrapper">
       <Header />
@@ -61,13 +61,16 @@ const DashboardThree = () => {
               </Col>
             ))}
         </Row>
-        {/* Visitors Overview */}
-        <div className="row">
+        <Row>
+          {!isEmpty(indonesia) && (
+            <Col lg={12}>
+              <IndonesianTable data={indonesia} />
+            </Col>
+          )}
           <Col lg={12}>
             <div className="card mb-4">
               <div className="card-body">
                 <div className="card-header">
-                  {/* <h5 className="card-title">Visitors Overview</h5> */}
                   <span className="day">Update hari ini</span>
                 </div>
                 {!isEmpty(dataByCountry) && (
@@ -76,9 +79,7 @@ const DashboardThree = () => {
               </div>
             </div>
           </Col>
-        </div>
-
-        <div className="flex-grow-1"></div>
+        </Row>
         <Footer />
       </Container>
     </div>
@@ -86,3 +87,23 @@ const DashboardThree = () => {
 };
 
 export default DashboardThree;
+
+const Header = loadable(() => import("../../components/Header/header"), {
+  fallback: <ContentLoader />
+});
+const Footer = loadable(() => import("../Footer/Footer"), {
+  fallback: <ContentLoader />
+});
+const DistributedColumnsChart = loadable(
+  () =>
+    import("../Apex-Charts/column-charts-components/DistributedColumnsChart"),
+  {
+    fallback: <ContentLoader />
+  }
+);
+const IndonesianTable = loadable(
+  () => import("../../components/Dashboard/indonesianTable"),
+  {
+    fallback: <ContentLoader />
+  }
+);

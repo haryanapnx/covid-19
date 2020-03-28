@@ -1,5 +1,7 @@
 const production = {
-  URL: "https://corona.lmao.ninja"
+  URL: "https://corona.lmao.ninja",
+  URL_ID:
+    "https://cors-anywhere.herokuapp.com/https://indonesia-covid-19.mathdro.id/api"
 };
 
-export const { URL } = production;
+export const { URL, URL_ID } = production;

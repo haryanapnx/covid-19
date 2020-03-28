@@ -27,7 +27,7 @@ export const getByCountry = (param = "") => async dispatch => {
   dispatch(setLoading(true, actionTypes.LOADING_BY_COUNTRY));
   const dataReq = {
     method: "get",
-    url: `/countries/${param}`
+    url: `/countries/${param}`,
   };
 
   const res = await dispatch(apiCall(dataReq));
@@ -36,6 +36,23 @@ export const getByCountry = (param = "") => async dispatch => {
     const { data } = res;
     dispatch({
       type: actionTypes.GET_BY_COUNTRY,
+      payload: data
+    });
+  }
+  return res;
+};
+export const getByIDProvince = (param = "") => async dispatch => {
+  const dataReq = {
+    method: "get",
+    url: "/provinsi",
+    isID:true
+  };
+
+  const res = await dispatch(apiCall(dataReq));
+  if (!isEmpty(res)) {
+    const { data } = res.data;
+    dispatch({
+      type: actionTypes.GET_BY_ID_PROVINCE,
       payload: data
     });
   }

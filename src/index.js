@@ -19,7 +19,7 @@ const AppRouter = loadable(() => import("./routes/AppRouter"));
 const persistConfig = {
   key: "root",
   storage,
-  // whitelist: ["auth", "staticStore"]
+  whitelist: ["countries", "dataGlobal"]
 };
 const persistedReducer = persistReducer(persistConfig, reducer);
 
@@ -27,7 +27,7 @@ let store = createStore(persistedReducer, applyMiddleware(thunkMiddleware));
 let persistor = persistStore(store);
 
 const App = () => (
-  <BrowserRouter basename="/login">
+  <BrowserRouter>
     <React.Fragment>
       <Provider store={store}>
         <>

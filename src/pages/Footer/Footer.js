@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 
 const Footer = () => (
   <>
-    <footer className="footer mt-2">
+    <footer className="footer mt-2 mb-4">
       <p>
         Powered by{" "}
         <a href="https://hary.fun" target="blank">

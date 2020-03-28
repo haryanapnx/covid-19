@@ -13,6 +13,7 @@ const NewUsers = ({ data }) => {
           <Table className="m-0" responsive>
             <thead>
               <tr>
+                <th></th>
                 <th>Negara</th>
                 <th>Kasus</th>
                 <th>Kasus Hari ini</th>
@@ -37,8 +38,8 @@ const NewUsers = ({ data }) => {
                         style={{ maxWidth: "15px" }}
                         src={people.countryInfo.flag}
                         alt={idx}
-                      />{' '}
-                       {people.country}
+                      />{" "}
+                      {people.country}
                     </Link>
                   </td>
                   <td>

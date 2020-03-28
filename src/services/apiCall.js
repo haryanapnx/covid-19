@@ -1,6 +1,6 @@
 import axios from "axios";
 import { isEmpty } from "../commons/helper";
-import { URL } from "./baseUrl";
+import { URL, URL_ID } from "./baseUrl";
 
 let contentType = { "Content-Type": "application/json" };
 
@@ -12,12 +12,14 @@ const defaultHeader = val => {
   }
 };
 
-export const apiCall = ({ method, url, data = "" }) => async dispatch => {
+export const apiCall = ({ method, url, data = "", isID }) => async () => {
   let head = !isEmpty(data.headers) ? defaultHeader(data.headers) : contentType;
+  const uri = isID ? URL_ID : URL;
+
   try {
     const response = await axios({
       method: method,
-      url: URL + url,
+      url: uri + url,
       data: data.data || "",
       headers: head || "",
       params: data.params || "",
@@ -25,7 +27,7 @@ export const apiCall = ({ method, url, data = "" }) => async dispatch => {
     });
     return response;
   } catch (error) {
-	  alert("Sorry, something went wrong there. Try again.");
-	  console.error(error);
+    alert("Sorry, something went wrong there. Try again.");
+    console.error(error);
   }
 };

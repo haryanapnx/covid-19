@@ -6,7 +6,8 @@ const initialState = {
   dataGlobal: null,
   countries: [{ value: "", label: "....." }],
   loading: false,
-  dataMap: null
+  dataMap: null,
+  indonesia:[]
 };
 
 export default (state = initialState, action) => {
@@ -14,7 +15,7 @@ export default (state = initialState, action) => {
   let countriesTmp = [];
   let coords = [];
   let kasus = [];
-  let negara =[]
+  let negara = []
   switch (type) {
     case actionType.GET_ALL_COUNTRY:
       payload.map(({ country, countryInfo,cases}) => {
@@ -33,6 +34,8 @@ export default (state = initialState, action) => {
       return { ...state, loading: payload };
     case actionType.GET_BY_COUNTRY:
       return { ...state, dataByCountry: payload };
+    case actionType.GET_BY_ID_PROVINCE:
+      return { ...state, indonesia: payload };
     case actionType.GET_COUNTRY:
       return { ...state, dataGlobal: payload };
     case actionType.LOADING_BY_COUNTRY:
