@@ -29,7 +29,6 @@ const Header = () => {
   let slug = !isEmpty(fromRouter)
     ? fromRouter
     : fromBrowser[fromBrowser.length - 1];
-  
 
   useEffect(() => {
     setSelectCountry({ value: slug, label: slug });
@@ -60,12 +59,19 @@ const Header = () => {
       {loading && <Loader />}
       <div className="bottom-nav shadow">
         <Row>
-          <Col xs={6}>
+          <Col xs={4}>
             <Button onClick={toHome} variant="outline-link">
               <Icon.Home className="icon" />
             </Button>
           </Col>
-          <Col xs={6}>
+          <Col xs={4}>
+            <div>
+              <Button onClick={getApi} variant="outline-link">
+                <Icon.RefreshCcw className="icon" />
+              </Button>
+            </div>
+          </Col>
+          <Col xs={4}>
             <Button
               variant="outline-link"
               onClick={() => window.scrollTo(0, 0)}
