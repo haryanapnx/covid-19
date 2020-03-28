@@ -62,7 +62,7 @@ const DashboardThree = () => {
             ))}
         </Row>
         <Row>
-          {!isEmpty(indonesia) && (
+          {slug === 'indonesia' && !isEmpty(indonesia) && (
             <Col lg={12}>
               <IndonesianTable data={indonesia} />
             </Col>
