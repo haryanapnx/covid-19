@@ -24,20 +24,10 @@ const Home = () => {
     <div className="page-wrapper">
       <Header />
       <Container className="bg-container shadow">
-        <Row noGutters>
-          <Col className="banner pl-3" sm={12} lg={12}>
-            <div className="mt-2 headline">
-              <h1>{!isEmpty(dataGlobal) ? dataGlobal.deaths : "-"}</h1>
-              <h5>
-                Orang Indonesia telah <br /> meninggal dunia <br />
-                karena <b>Corona</b>
-              </h5>
-            </div>
-            <a href="https://linktr.ee/helloimgalih" target="blank">
-              <i>Image by galih</i>
-            </a>
-          </Col>
-        </Row>
+        <Banner
+          data={!isEmpty(dataGlobal) ? dataGlobal.deaths : 0}
+          negara={"di seluruh dunia"}
+        />
         <div className="main-content-header mt-4">
           <Breadcrumb>
             <Link
@@ -97,6 +87,9 @@ const CustomJVectorMap = loadable(() => import("../Map/CustomJVectorMap"), {
   fallback: <ContentLoader />
 });
 const NewUsers = loadable(() => import("../../components/Dashboard/NewUsers"), {
+  fallback: <ContentLoader />
+});
+const Banner = loadable(() => import("../../components/Dashboard/Banner"), {
   fallback: <ContentLoader />
 });
 const Footer = loadable(() => import("../Footer/Footer"), {

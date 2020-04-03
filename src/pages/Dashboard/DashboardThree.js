@@ -39,6 +39,10 @@ const DashboardThree = () => {
     <div className="page-wrapper">
       <Header />
       <Container className="bg-container shadow">
+        <Banner
+          data={!isEmpty(dataByCountry) ? dataByCountry.deaths : 0}
+          negara={slug.charAt(0).toUpperCase() + slug.substr(1).toLowerCase()}
+        />
         <div className="main-content-header">
           <Breadcrumb>
             <Breadcrumb.Item>Negara</Breadcrumb.Item>
@@ -62,7 +66,7 @@ const DashboardThree = () => {
             ))}
         </Row>
         <Row>
-          {slug === 'indonesia' && !isEmpty(indonesia) && (
+          {slug === "indonesia" && !isEmpty(indonesia) && (
             <Col lg={12}>
               <IndonesianTable data={indonesia} />
             </Col>
@@ -101,6 +105,9 @@ const DistributedColumnsChart = loadable(
     fallback: <ContentLoader />
   }
 );
+const Banner = loadable(() => import("../../components/Dashboard/Banner"), {
+  fallback: <ContentLoader />
+});
 const IndonesianTable = loadable(
   () => import("../../components/Dashboard/indonesianTable"),
   {
