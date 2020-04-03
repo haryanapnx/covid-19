@@ -1,6 +1,51 @@
-.bg-container{
-    background-color: #ffffff !important;
-    margin-top:-10em;
-    padding: 2em;
-    border-radius: 10px;
+$gri: #383838;
+$red: #d40000;
+
+.bg-container {
+  background-color: #ffffff !important;
+  margin-top: -10em;
+  padding: 1;
+  border-radius: 10px;
+}
+
+.banner {
+  background-image: url("../../assets/img/covid.png");
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  // padding: 1em;
+  h1 {
+    font-size: 7em;
+    color: $red;
+    text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    margin-bottom: -5px;
+  }
+
+  a {
+    right: 1em;
+    bottom: 0.1em;
+    position: absolute;
+    color: $gri;
+    opacity: 0.3;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  min-height: 370px;
+  @media screen and (max-width: 768px) {
+    min-height: 150px;
+    .headline {
+      h1 {
+        font-size: 2em;
+      }
+      h5 {
+        font-size: 8px;
+      }
+    }
+    a {
+      i {
+        font-size: 8px;
+      }
+    }
+  }
 }

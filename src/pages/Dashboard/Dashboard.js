@@ -8,7 +8,6 @@ import "./home.css";
 import { isEmpty } from "../../commons/helper";
 import ContentLoader from "react-content-loader";
 
-
 const Home = () => {
   const { dataGlobal, dataMap, data } = useSelector(
     ({ getAllCountries }) => getAllCountries
@@ -25,7 +24,21 @@ const Home = () => {
     <div className="page-wrapper">
       <Header />
       <Container className="bg-container shadow">
-        <div className="main-content-header">
+        <Row noGutters>
+          <Col className="banner pl-3" sm={12} lg={12}>
+            <div className="mt-2 headline">
+              <h1>{!isEmpty(dataGlobal) ? dataGlobal.deaths : "-"}</h1>
+              <h5>
+                Orang Indonesia telah <br /> meninggal dunia <br />
+                karena <b>Corona</b>
+              </h5>
+            </div>
+            <a href="https://linktr.ee/helloimgalih" target="blank">
+              <i>Image by galih</i>
+            </a>
+          </Col>
+        </Row>
+        <div className="main-content-header mt-4">
           <Breadcrumb>
             <Link
               to={{
@@ -52,16 +65,17 @@ const Home = () => {
               </Col>
             ))}
         </Row>
+
         <Row>
           {!isEmpty(data) && (
             <>
               <Col lg={12}>
+                <CustomJVectorMap data={dataMap} />
+              </Col>
+              <Col lg={12}>
                 <NewUsers data={data} />
               </Col>
 
-              <Col lg={12}>
-                <CustomJVectorMap data={dataMap} />
-              </Col>
               <Col lg={12}>
                 <SalesByCountries data={data} />
               </Col>
@@ -75,7 +89,6 @@ const Home = () => {
 };
 
 export default Home;
-
 
 const Header = loadable(() => import("../../components/Header/header"), {
   fallback: <ContentLoader />

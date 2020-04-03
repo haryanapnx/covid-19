@@ -13,7 +13,6 @@ const NewUsers = ({ data }) => {
           <Table className="m-0" responsive>
             <thead>
               <tr>
-                <th></th>
                 <th>Negara</th>
                 <th>Kasus</th>
                 <th>Kasus Hari ini</th>
